@@ -1,0 +1,64 @@
+# LET THERE BE VIM
+set -o vi
+
+# utils
+alias rep='grep -rI --exclude-dir ".stack-work*" --exclude "tags" --exclude "*.js" --exclude-dir ".hg"'
+
+alias splitxml="perl -pe 'BEGIN{ $/=\">\" } s/>/>\n/g'"  # PERL'S $/ variable defines what line-end is, so \n isn't everything anymore!
+
+# There's more to less. This makes psql not such a bind to use.
+export PAGER=less
+export LESS='-r -C -M -j10 -#4'
+# -r:   show colours
+# -C:   start from top
+# -M:   give more info
+# -j10: give more context around search hits
+# -#4:  move 4 rows/columns instead of half-page
+
+export EDITOR=vim
+
+# Stack helpers
+alias stack-build='stack build --work-dir=.stack-work '
+alias stack-build-fast='stack build --fast --work-dir=.stack-work-fast'
+alias stack-build-profile='stack build --profile --work-dir=.stack-work-profile '
+alias stack-build-optimised='stack build --work-dir=.stack-work-optimised --ghc-options -O2'
+alias stack-clean='stack clean --work-dir=.stack-work '
+alias stack-clean-fast='stack clean --work-dir=.stack-work-fast '
+alias stack-clean-profile='stack clean --work-dir=.stack-work-profile '
+alias stack-clean-optimised='stack clean --work-dir=.stack-work-optimised '
+alias stack-clean-pedantic='stack clean --work-dir=.stack-work-pedantic '
+alias stack-exec='stack exec --work-dir=.stack-work '
+alias stack-exec-fast='stack exec --work-dir=.stack-work-fast '
+alias stack-exec-profile='stack exec --work-dir=.stack-work-profile --rts-options -p'
+alias stack-exec-optimised='stack exec --work-dir=.stack-work-optimised '
+alias stack-install='stack install --work-dir=.stack-work '
+alias stack-install-fast='stack install --work-dir=.stack-work-fast --fast '
+alias stack-install-profile='stack install --work-dir=.stack-work-profile '
+alias stack-install-optimised='stack install --work-dir=.stack-work-optimised '
+
+
+# More utils
+repeatedlyRun() {
+    while true; do
+        "$@";
+    done
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+isgitrepo()
+{
+  if git rev-parse  --git-dir 2>&1 > /dev/null ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+export PS1='\[\e]0;\u@\h: \w\a\]\n\[\e[0;32m\]\u@\h \[\e[m\]\[\e[33m\]\w\[\e[0m\]\[\e[m\]\[\e[0;36m\] $(isgitrepo 2>&1 > /dev/null && git symbolic-ref --short HEAD)\[\e[m\]\r\n\$ '
+
+test -f ~/.git-completion.bash && source $_
+
+[ -s "$HOME/.thismachinerc" ] && source "$HOME/.thismachinerc"

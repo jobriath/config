@@ -1,0 +1,9 @@
+jobriath's config
+
+To bring a config file under source control, run the following:
+
+    mv /abs/path/to/old/.config /path/to/config-repo/
+
+To install a config file on a new machine, or to backfill the just-moved config on the source machine, run the following:
+
+    ln -s /abs/path/to/old/.config /path/to/config-repo/.config
