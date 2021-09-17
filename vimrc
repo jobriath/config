@@ -19,7 +19,6 @@ set backspace=indent,eol,start
 if ! exists("mapleader")
   let mapleader = ","
 endif
-
 if ! exists("g:mapleader")
   let g:mapleader = ","
 endif
@@ -29,10 +28,6 @@ set tm=2000
 
 " Allow the normal use of "," by pressing it twice
 noremap ,, ,
-
-" Use par for prettier line formatting
-"set formatprg=par
-"let $PARINIT = 'rTbgqR B=.,?_A_a Q=_s>|'
 
 " Kill the damned Ex mode.
 nnoremap Q <nop>
@@ -47,6 +42,24 @@ endif
 
 " }}}
 
+" Asynchronous linting engine {{{
+
+"fast syntax checking
+"this disables some linters that don't work
+let g:ale_linters = {
+\   'haskell': ['stack-ghc', 'hlint', 'hdevtools', 'hfmt' ],
+\   'cs': [],
+\   'kotlin': ['languageserver']
+\}
+let g:ale_haskell_stack_build_options = '--fast --work-dir .stack-work-ale --test --no-run-tests'
+let g:ale_completion_enabled = 1  " Use ALE's own autocomplete            .
+"nmap <silent> <A-PageUp> <Plug>(ale_previous_wrap)
+"nmap <silent> <A-PageDown> <Plug>(ale_next_wrap)
+"nnoremap <A-Enter> :ALEDetail <cr>
+
+" }}}
+
+
 " Plugins {{{
  
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -57,49 +70,38 @@ endif
 
 call plug#begin('~/.local/share/vim/plugged')
 
-" tags
+" Tags
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*"]
 
-" Colourscheme
+" Look and feel
 Plug 'vim-scripts/wombat256.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'  " Relative/absolute line numbers
 
 " Syntaces
 Plug 'posva/vim-vue'
 Plug 'udalov/kotlin-vim'
 
-" Support bundles
-"Plug 'jgdavey/tslime.vim'
-"Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'ervandew/supertab'
-"Plug 'benekastah/neomake'
-"Plug 'moll/vim-bbye'
-"Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'vim-scripts/gitignore'
-
-" Bars, panels, and files
-Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
-"Plug 'majutsushi/tagbar'
-Plug 'christoomey/vim-tmux-navigator'
+" Completion
+Plug 'ervandew/supertab'  " Tab autocompletion
 
 " Text manipulation
-"Plug 'vim-scripts/Align'
-"Plug 'simnalamburt/vim-mundo'
-"Plug 'tpope/vim-commentary'
 Plug 'godlygeek/tabular'
-"Plug 'michaeljsmith/vim-indent-object'
-"Plug 'easymotion/vim-easymotion'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-surround'               " ds(  cs[{
 Plug 'jeetsukumaran/vim-indentwise'
 
 " Linters
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
-" Haskell type inspection
-Plug 'hdevtools/hdevtools', {'for': 'haskell'}
+" Trying ALE instead of following...
+"Plug 'prabirshrestha/async.vim'  " Dependency for below
+"Plug 'prabirshrestha/vim-lsp'  " Core LSP client
+"Plug 'mattn/vim-lsp-settings'  " Autoconfig package. Invoke in a supported filetype with :LspInstallServer. See https://github.com/mattn/vim-lsp-settings for deets.
+"let g:lsp_diagnostics_enabled = 0
 
 " Fuzzy-find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -108,42 +110,17 @@ Plug 'junegunn/fzf.vim'
 " Haskell
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'JonnyRa/vim-himposter'
-"Plug 'parsonsmatt/intero-neovim'  " stopped using this
-"Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-"Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
-"Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
-"Plug 'mpickering/hlint-refactor-vim', { 'for': 'haskell' }
 
-" Relative/absolute line numbers
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
-" Passively highlight occurences of word under cursor
-Plug 'RRethy/vim-illuminate'
-" Don't delay before highlighting (time in milliseconds)
-let g:Illuminate_delay = 0
-hi illuminatedWord cterm=underline gui=underline
+" Let there be REST consoles
+Plug 'diepm/vim-rest-console'
 
 call plug#end()
-
-" }}}
-
-" {{{ vim-sneak
-
-let g:sneak#label = 1
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
 
 " }}}
 
 " vim-himporter {{{
 
 let g:himporterCreateMappings = 1
-
-" }}}
-
-" Relative line numbering {{{
-
-:set number relativenumber
 
 " }}}
 
@@ -167,21 +144,6 @@ nnoremap <C-_> :execute "Tags ".expand('<cword>')<cr>
 
 " }}}
 
-" Asynchronous linting engine {{{
-
-"fast syntax checking
-"this disables some linters that don't work
-let g:ale_linters = {
-\   'haskell': ['stack-ghc', 'hlint', 'hdevtools', 'hfmt' ],
-\    'cs': []
-\}
-let g:ale_haskell_stack_build_options = '--fast --work-dir .stack-work-ale --test --no-run-tests'
-nmap <silent> <A-PageUp> <Plug>(ale_previous_wrap)
-nmap <silent> <A-PageDown> <Plug>(ale_next_wrap)
-nnoremap <A-Enter> :ALEDetail <cr>
-
-" }}}
-
 " Filetypes {{{
 
 augroup vue
@@ -197,8 +159,8 @@ augroup END
 
 " calls a shell script to dump in all the haskell files
 augroup tags
-  au BufWritePost *.hs      silent !init-tags %
-  au BufWritePost *.hsc     silent !init-tags %
+"  au BufWritePost *.hs      silent !init-tags %      " Don't do this---messes up under Mac env. Not sure what I'll miss, tbough.
+"  au BufWritePost *.hsc     silent !init-tags %
 augroup END
 
 " }}}
@@ -400,7 +362,7 @@ set laststatus=2
 " NERDTree {{{
 
 " Close nerdtree after a file is selected
-let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 0
 
 function! IsNERDTreeOpen()
   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)

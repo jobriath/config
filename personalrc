@@ -1,8 +1,10 @@
 # LET THERE BE VIM
 set -o vi
 
-# utils
-alias rep='grep -rI --exclude-dir ".stack-work*" --exclude "tags" --exclude "*.js" --exclude-dir ".hg"'
+alias ll='ls -l'
+
+# Use ripgrep `rg` instead, though.
+alias rep='grep -rI --exclude-dir "node_modules" --exclude-dir ".stack-work*" --exclude "tags" --exclude-dir ".hg" --exclude-dir ".git" --exclude-dir "build" --exclude-dir "out" --exclude-dir ".idea"'
 
 alias splitxml="perl -pe 'BEGIN{ $/=\">\" } s/>/>\n/g'"  # PERL'S $/ variable defines what line-end is, so \n isn't everything anymore!
 
@@ -16,6 +18,13 @@ export LESS='-r -C -M -j10 -#4'
 # -#4:  move 4 rows/columns instead of half-page
 
 export EDITOR=vim
+
+# FZF engine replacement.
+if type rg &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+elif type ag &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+fi
 
 # Stack helpers
 alias stack-build='stack build --work-dir=.stack-work '
@@ -61,4 +70,31 @@ export PS1='\[\e]0;\u@\h: \w\a\]\n\[\e[0;32m\]\u@\h \[\e[m\]\[\e[33m\]\w\[\e[0m\
 
 test -f ~/.git-completion.bash && source $_
 
+# ls et al. should be in colour!
+export CLICOLOR=1
+
+# bash-completion config
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 [ -s "$HOME/.thismachinerc" ] && source "$HOME/.thismachinerc"
+
+# Kubernetes
+function kns() {
+  newNamespace="$1"
+  if [ -z "$newNamespace" ]
+  then
+    kubectl config get-contexts
+  else
+    kubectl config set-context --current --namespace="$newNamespace"
+  fi
+}
+
+# Something to beep from the commandline
+function bell() {
+  tput bel && tput bel && tput bel && tput bel
+}
+
+# PYTHONPATH isn't set on my mac.
+# Here are the defaults it reported before replacing them with brew-enabled equivalents: ['/Users/aha03/workspace/betfair-mps', '/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python37.zip', '/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python3.7', '/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python3.7/lib-dynload', '/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.7/lib/python3.7/site-packages']
+PYTHONPATH="$PYTHONPATH:/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/python37.zip:/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/python3.7:/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/lib/python3.7/lib-dynload:/usr/local/lib/python3.7/site-packages"
