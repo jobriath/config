@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AlternateMouseScroll</key>
-	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>ApplePressAndHoldEnabled</key>
@@ -15,7 +13,7 @@
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
 	<key>Default Bookmark Guid</key>
-	<string>054A8B0F-E864-4FDE-B825-C7CAEBE8B650</string>
+	<string>BB8826B3-133C-4AD5-A06B-D1D3B82F6678</string>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -233,8 +231,6 @@
 			<string>Default</string>
 			<key>Disable Window Resizing</key>
 			<true/>
-			<key>Draw Powerline Glyphs</key>
-			<true/>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>
@@ -247,7 +243,7 @@
 				<real>0.73333334922790527</real>
 			</dict>
 			<key>Guid</key>
-			<string>054A8B0F-E864-4FDE-B825-C7CAEBE8B650</string>
+			<string>BB8826B3-133C-4AD5-A06B-D1D3B82F6678</string>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
 			<key>Idle Code</key>
@@ -542,8 +538,6 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
-			<key>Minimum Contrast</key>
-			<real>0.47824928977272729</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -596,8 +590,6 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
-			<key>Thin Strokes</key>
-			<integer>4</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -620,62 +612,9 @@
 			<string>/Users/aha03</string>
 		</dict>
 	</array>
-	<key>OpenArrangementAtStartup</key>
-	<false/>
-	<key>OpenNoWindowsAtStartup</key>
-	<false/>
-	<key>OpenTmuxWindowsIn</key>
-	<integer>0</integer>
-	<key>PMPrintingExpandedStateForPrint2</key>
-	<false/>
-	<key>PointerActions</key>
-	<dict>
-		<key>Button,1,1,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kContextMenuPointerAction</string>
-		</dict>
-		<key>Button,2,1,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kPasteFromClipboardPointerAction</string>
-		</dict>
-		<key>Gesture,ThreeFingerSwipeDown,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kPrevWindowPointerAction</string>
-		</dict>
-		<key>Gesture,ThreeFingerSwipeLeft,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kPrevTabPointerAction</string>
-		</dict>
-		<key>Gesture,ThreeFingerSwipeRight,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kNextTabPointerAction</string>
-		</dict>
-		<key>Gesture,ThreeFingerSwipeUp,,</key>
-		<dict>
-			<key>Action</key>
-			<string>kNextWindowPointerAction</string>
-		</dict>
-	</dict>
-	<key>Print In Black And White</key>
-	<true/>
-	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
-	<false/>
-	<key>QuitWhenAllWindowsClosed</key>
-	<true/>
-	<key>ShowFullScreenTabBar</key>
-	<false/>
 	<key>SoundForEsc</key>
 	<false/>
-	<key>SuppressRestartAnnouncement</key>
-	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
-	<key>findMode_iTerm</key>
-	<integer>0</integer>
 </dict>
 </plist>
