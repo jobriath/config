@@ -2,7 +2,6 @@
 
 config=$(cd "$(dirname "$0")" || exit 1; pwd)
 
-
 function install ()
 {
   local machine_path=$1;
@@ -89,14 +88,18 @@ function check_keyring_backend ()
 }
 
 #check_tmux_plugin_manager_is_installed
-#install "$HOME/.tmux.conf" "$config/tmux.conf";
+install "$HOME/.tmux.conf" "$config/tmux.conf";
 
-#install "$HOME/.vimrc" "$config/vimrc";
+install "$HOME/.vimrc" "$config/vimrc";
 
 install_personalrc
+install "$HOME/.commonrc" "$config/commonrc"
+install "$HOME/.zshrc" "$config/zshrc"
 
-#install "$HOME/.stack/config.yaml" "$config/stack-config.yaml"
+install "$HOME/.stack/config.yaml" "$config/stack-config.yaml"
 
-#check_keyring_backend
+check_keyring_backend
+
+git config --global core.excludesfile `readlink -f .gitignore-global`
 
 echo "Installation complete."

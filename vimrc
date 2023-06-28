@@ -60,6 +60,24 @@ let g:ale_completion_enabled = 1  " Use ALE's own autocomplete            .
 " }}}
 
 
+" {{{ vindent
+let g:vindent_motion_OO_prev   = '[=' " jump to prev block of same indent.
+let g:vindent_motion_OO_next   = ']=' " jump to next block of same indent.
+let g:vindent_motion_more_prev = '[+' " jump to prev line with more indent.
+let g:vindent_motion_more_next = ']+' " jump to next line with more indent.
+let g:vindent_motion_less_prev = '[-' " jump to prev line with less indent.
+let g:vindent_motion_less_next = ']-' " jump to next line with less indent.
+let g:vindent_motion_diff_prev = '[;' " jump to prev line with different indent.
+let g:vindent_motion_diff_next = '];' " jump to next line with different indent.
+let g:vindent_motion_XX_ss     = '[p' " jump to start of the current block scope.
+let g:vindent_motion_XX_se     = ']p' " jump to end   of the current block scope.
+let g:vindent_object_XX_ii     = 'ii' " select current block.
+let g:vindent_object_XX_ai     = 'ai' " select current block + one extra line  at beginning.
+let g:vindent_object_XX_aI     = 'aI' " select current block + two extra lines at beginning and end.
+let g:vindent_jumps            = 1    " make vindent motion count as a |jump-motion| (works with |jumplist|).
+" }}}
+
+
 " Plugins {{{
  
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -92,7 +110,7 @@ Plug 'ervandew/supertab'  " Tab autocompletion
 Plug 'godlygeek/tabular'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'tpope/vim-surround'               " ds(  cs[{
-Plug 'jeetsukumaran/vim-indentwise'
+Plug 'jessekelighine/vindent.vim'
 
 " Linters
 Plug 'dense-analysis/ale'
@@ -265,6 +283,9 @@ hi Directory guifg=#8ac6f2
 
 " Searing red very visible cursor
 hi Cursor guibg=red
+
+" ALE shouldn't shout in red.
+hi SpellBad ctermbg=8
 
 " Don't blink normal mode cursor
 set guicursor=n-v-c:block-Cursor
