@@ -1,7 +1,13 @@
-[ -s "$HOME/.commonrc" ] && source "$HOME/.commonrc"
-
 # Make tab-complation act more like bash (no auto-insert)
 setopt nomenucomplete
+
+# Autocompletion fun.
+autoload -Uz compinit
+compinit
+autoload bashcompinit
+bashcompinit
+
+[ -s "$HOME/.commonrc" ] && source "$HOME/.commonrc"
 
 # Prompt
 setopt PROMPT_SUBST  # Allow $(...) expansion in prompt
