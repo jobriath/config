@@ -115,12 +115,6 @@ Plug 'jessekelighine/vindent.vim'
 " Linters
 Plug 'dense-analysis/ale'
 
-" Trying ALE instead of following...
-"Plug 'prabirshrestha/async.vim'  " Dependency for below
-"Plug 'prabirshrestha/vim-lsp'  " Core LSP client
-"Plug 'mattn/vim-lsp-settings'  " Autoconfig package. Invoke in a supported filetype with :LspInstallServer. See https://github.com/mattn/vim-lsp-settings for deets.
-"let g:lsp_diagnostics_enabled = 0
-
 " Fuzzy-find
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
