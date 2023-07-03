@@ -21,7 +21,7 @@ export EDITOR=vim
 
 # FZF engine replacement.
 if type rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    export FZF_DEFAULT_COMMAND="rg --files --hidden -g !'.git/' -g '!node_modules/'"
 elif type ag &> /dev/null; then
     export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 fi
