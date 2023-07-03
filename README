@@ -7,3 +7,15 @@ To bring a config file under source control, run the following:
 To install a config file on a new machine, or to backfill the just-moved config on the source machine, run the following:
 
     ln -s /abs/path/to/old/.config /path/to/config-repo/.config
+
+# Manual setup
+
+## ssh identities
+
+In `~/.ssh/config`, add lines
+
+```
+IdentityFile ~/.ssh/id_newkey
+```
+
+
