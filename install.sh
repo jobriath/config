@@ -87,7 +87,7 @@ function check_keyring_backend ()
   fi
 }
 
-#check_tmux_plugin_manager_is_installed
+check_tmux_plugin_manager_is_installed
 install "$HOME/.tmux.conf" "$config/tmux.conf";
 
 install "$HOME/.vimrc" "$config/vimrc";
@@ -100,6 +100,6 @@ install "$HOME/.stack/config.yaml" "$config/stack-config.yaml"
 
 check_keyring_backend
 
-git config --global core.excludesfile `readlink -f .gitignore-global`
+git config --global core.excludesfile "$(readlink -f .gitignore-global)"
 
 echo "Installation complete."
