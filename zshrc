@@ -20,3 +20,5 @@ export PROMPT="${NEWLINE}%F{green}%n@%m %F{yellow}%1~/ %F{cyan}"'$(isgitrepo 2>&
 
 # Vim mode quashes C-R history searching
 bindkey '^r' history-incremental-search-backward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
