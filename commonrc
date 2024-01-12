@@ -57,6 +57,10 @@ setSshProfile() {
 
   ssh-add -D
   ssh-add "$HOME/.ssh/id_$profile"
+
+  # Switching keys may still leave a socket tied to a different account, so delete socket.
+  rm "$HOME/.ssh/sockets/git@ssh.github.com-443" 2>/dev/null
+  echo "Cleared open sockets"
 }
 
 export NVM_DIR="$HOME/.nvm"
