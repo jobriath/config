@@ -1,4 +1,4 @@
-jobriath's config
+# jobriath's config
 
 To bring a config file under source control, run the following:
 
@@ -17,5 +17,4 @@ In `~/.ssh/config`, add lines
 ```
 IdentityFile ~/.ssh/id_newkey
 ```
-
 
