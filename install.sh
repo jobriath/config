@@ -27,7 +27,7 @@ function install_personalrc ()
 {
   local config_path="$config/personalrc"
 
-  if [[ $(uname) == "GNU/Linux" ]]
+  if [[ $(uname) == "GNU/Linux" || $(uname) == "Linux" ]]
   then
     local machine_path="$HOME/.personalrc"
     install "$machine_path" "$config_path"
