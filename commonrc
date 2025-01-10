@@ -6,6 +6,9 @@ alias ll='ls -l'
 # Use ripgrep `rg` instead, though.
 alias rep='grep -rI --exclude-dir "node_modules" --exclude-dir ".stack-work*" --exclude "tags" --exclude-dir ".hg" --exclude-dir ".git" --exclude-dir "build" --exclude-dir "out" --exclude-dir ".idea"'
 
+alias rgg="rg -g'!*test*' -g'!*node_modules*' -g'!*spec*' -g'!*extracted_queries*'"
+alias rgt="rg -g'*test*' -g'!*node_modules*' -g'!*spec*' -g'!*extracted_queries*'"
+
 alias splitxml="perl -pe 'BEGIN{ $/=\">\" } s/>/>\n/g'"  # PERL'S $/ variable defines what line-end is, so \n isn't everything anymore!
 
 # There's more to less. This makes psql not such a bind to use.

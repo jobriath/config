@@ -90,14 +90,14 @@ call plug#begin('~/.local/share/vim/plugged')
 
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*"]
+let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*", "dist"]
+" let g:gutentags_trace = 1
 
 " Look and feel
 Plug 'vim-scripts/wombat256.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'  " Relative/absolute line numbers
 
 " Syntaces
 Plug 'posva/vim-vue'
