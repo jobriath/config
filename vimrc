@@ -48,11 +48,8 @@ endif
 "this disables some linters that don't work
 let g:ale_linters = {
 \   'haskell': ['stack-ghc', 'hlint', 'hdevtools', 'hfmt' ],
-\   'cs': [],
-\   'kotlin': ['languageserver']
 \}
 let g:ale_haskell_stack_build_options = '--fast --work-dir .stack-work-ale --test --no-run-tests'
-let g:ale_completion_enabled = 1  " Use ALE's own autocomplete            .
 "nmap <silent> <A-PageUp> <Plug>(ale_previous_wrap)
 "nmap <silent> <A-PageDown> <Plug>(ale_next_wrap)
 "nnoremap <A-Enter> :ALEDetail <cr>
@@ -91,20 +88,12 @@ call plug#begin('~/.local/share/vim/plugged')
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*", "dist"]
-" let g:gutentags_trace = 1
 
 " Look and feel
 Plug 'vim-scripts/wombat256.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
-
-" Syntaces
-Plug 'posva/vim-vue'
-Plug 'udalov/kotlin-vim'
-
-" Completion
-Plug 'ervandew/supertab'  " Tab autocompletion
 
 " Text manipulation
 Plug 'godlygeek/tabular'
@@ -119,12 +108,16 @@ Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Haskell
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'JonnyRa/vim-himposter'
-
 " Let there be REST consoles
 Plug 'diepm/vim-rest-console'
+
+" LSP+autocomplete
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
+Plug 'rhysd/vim-lsp-ale'
+" install or update LSPs with :LspInstallServer
 
 call plug#end()
 
@@ -153,17 +146,6 @@ autocmd FileType haskell nnoremap <buffer> <Leader>hi :HdevtoolsInfo<CR>
 
 nnoremap <C-t> :Tags<cr>
 nnoremap <C-_> :execute "Tags ".expand('<cword>')<cr>
-
-" }}}
-
-" Filetypes {{{
-
-augroup vue
-  au!
-
-  " Julius is javascript, basically.
-  autocmd BufNewFile,BufRead *.julius set syntax=javascript
-augroup END
 
 " }}}
 
