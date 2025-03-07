@@ -98,8 +98,9 @@ install "$HOME/.zshrc" "$config/zshrc"
 
 install "$HOME/.stack/config.yaml" "$config/stack-config.yaml"
 
-check_keyring_backend
+install "$HOME/.gitignore" "$config/gitignore-global"
+install "$HOME/.gitconfig" "$config/gitconfig"
 
-git config --global core.excludesfile "$(readlink -f .gitignore-global)"
+check_keyring_backend
 
 echo "Installation complete."
