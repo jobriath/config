@@ -34,6 +34,9 @@ nnoremap Q <nop>
 " Kill non-useful quits.
 nnoremap ZZ <nop>
 
+" Clear registers
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+
 
 " Make <c-h> work like <c-h> again (this is a problem with libterm)
 if has('nvim')
@@ -308,6 +311,8 @@ nmap <leader>W :w! <C-R>=expand("%:p:h") . '/'<CR>
 nmap <leader>r :e  <C-R>=expand("%")<CR><CR>
 nmap <leader>R :e! <C-R>=expand("%")<CR><CR>
 
+"nnoremap <leader>rm :call delete(expand('%')) \| bdelete!<CR>
+
 " Show undo tree
 "nmap <silent> <leader>u :MundoToggle<CR>
 
@@ -400,3 +405,14 @@ set completeopt+=longest
 let g:SuperTabDefaultCompletionType = '<c-x><c-p>'
 
 " }}}
+
+" When editing syntax files, call this function to see what syntax category the cursor is over.
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+command! GetSyntaxStack call SynStack()

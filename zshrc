@@ -25,3 +25,5 @@ bindkey '^r' history-incremental-search-backward
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+[ -f "/Users/andrew.handley-marsh/.ghcup/env" ] && . "/Users/andrew.handley-marsh/.ghcup/env" # ghcup-env
