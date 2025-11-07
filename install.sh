@@ -96,8 +96,6 @@ install_personalrc
 install "$HOME/.commonrc" "$config/commonrc"
 install "$HOME/.zshrc" "$config/zshrc"
 
-install "$HOME/.stack/config.yaml" "$config/stack-config.yaml"
-
 install "$HOME/.gitignore" "$config/gitignore-global"
 install "$HOME/.gitconfig" "$config/gitconfig"
 
