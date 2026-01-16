@@ -31,6 +31,7 @@ function install_personalrc ()
   then
     local machine_path="$HOME/.personalrc"
     install "$machine_path" "$config_path"
+    chmod u+x "$machine_path"
     augment_script "FUSILAGE TOMATO TERROR WANE" "$HOME/.profile" "$machine_path"
 
   elif [[ $(uname) == "Darwin" ]]
@@ -77,6 +78,32 @@ function check_tmux_plugin_manager_is_installed ()
   fi
 }
 
+function apply_git_config ()
+{
+  touch ~/.gitconfig
+
+  git config --global core.excludesFile ~/.gitignore
+  git config --global merge.conflictStyle zdiff3
+  git config --global truecore.pager delta
+  git config --global diff.algorithm histogram
+  git config --global diff.colorMoved default
+  git config --global diff.mnemonicPrefix true
+  git config --global diff.colorMovedWD allow-indentation-change
+  git config --global branch.sort -committerdate
+  git config --global fetch.prune true
+  git config --global fetch.pruneTags true
+  git config --global changelog.date iso
+  git config --global commit.verbose true
+  git config --global column.ui auto
+  git config --global push.default simple
+  git config --global push.autoSetupRemote true
+  git config --global push.followTags true
+  git config --global help.autocorrect prompt
+  git config --global rerere.enabled true
+  git config --global rerere.autoupdate true
+  git config --global init.defaultBranch main
+}
+
 function check_keyring_backend ()
 {
   if ! grep -q PlaintextKeyring "$HOME/.local/share/python_keyring/keyringrc.cfg"
@@ -97,7 +124,7 @@ install "$HOME/.commonrc" "$config/commonrc"
 install "$HOME/.zshrc" "$config/zshrc"
 
 install "$HOME/.gitignore" "$config/gitignore-global"
-install "$HOME/.gitconfig" "$config/gitconfig"
+apply_git_config
 
 check_keyring_backend
 
